@@ -1,9 +1,19 @@
 # Table of contents
 
-## SEGUR
+## SEGURTASUNA
 
-* [Page 1](README.md)
-* [SEA](segur/sea.md)
+* [Monitorizazioa](README.md)
+* [HAProxy](segurtasuna/haproxy.md)
+
+## Sistema Banatua
+
+* [VM eta CT Erabilgarritasun handia (HA)](sistema-banatua/vm-eta-ct-erabilgarritasun-handia-ha.md)
+* [Promox Backup Server](sistema-banatua/promox-backup-server.md)
+* [Segurtasun kopia plana](sistema-banatua/segurtasun-kopia-plana.md)
+
+***
+
+* [SEA](sea.md)
 
 ## IRAUNKORTASUNA
 
