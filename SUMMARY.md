@@ -19,5 +19,6 @@
 
 ## HACKING
 
+* [pentesting](hacking/pentesting.md)
 * [sql injection](hacking/sql-injection.md)
 * [xss](hacking/xss.md)

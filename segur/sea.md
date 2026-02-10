@@ -14,17 +14,17 @@ Ondoko komandotatik denak egin dira
 
 1️⃣-Erabiltzaile bat sortu OU baten barruan eta pasahitza eskatuta
 
-<figure><img src="../.gitbook/assets/unknown (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2️⃣-Bi erabiltzaile OU batetik bestera mugitu
 
 1.Erabiltzailea
 
-<figure><img src="../.gitbook/assets/unknown (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 2.erabiltzailea
 
-<figure><img src="../.gitbook/assets/unknown (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 3️⃣- Erabiltzaile bi talde batetik atera
 
@@ -32,47 +32,47 @@ Ondoko komandotatik denak egin dira
 
 Oskar erabiltzaileak inprimagailu taldean daude
 
-<figure><img src="../.gitbook/assets/unknown (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Taldetik kampo
 
-<figure><img src="../.gitbook/assets/unknown (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 4️⃣ -Erabiltzaile bi talde baten sartu
 
-<figure><img src="../.gitbook/assets/unknown (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 5️⃣- OU bat kokapen batetik bestera mugitu
 
 <br>
 
-<figure><img src="../.gitbook/assets/unknown (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (7) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/unknown (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 6️⃣ -Talde baten barruan dauden erabiltzaileen zerrenda atera
 
-<figure><img src="../.gitbook/assets/unknown (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 7️⃣ -Izenean testu jakin bat daukaten taldeak zerrendatu
 
-<figure><img src="../.gitbook/assets/unknown (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 8️⃣- Globalak ez diren taldeak zerrendatu
 
-<figure><img src="../.gitbook/assets/unknown (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 9️⃣- Erabiltzaile bat ezgaitu
 
-<figure><img src="../.gitbook/assets/unknown (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 1️⃣0️⃣- Ezgaituta dauden erabiltzaileak zerrendatu
 
-<figure><img src="../.gitbook/assets/unknown (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 1️⃣1️⃣- OU-en egitura zerrendatu
 
-<figure><img src="../.gitbook/assets/unknown (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 <br>

@@ -475,7 +475,7 @@ Produktuaren amaieraren baliokidea.
 * Impacto social y económico
 * Cumplimiento ESG
 
-<figure><img src="../.gitbook/assets/unknown.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (14).png" alt=""><figcaption></figcaption></figure>
 
 \
 \

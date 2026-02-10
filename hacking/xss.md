@@ -6,25 +6,25 @@
 
 Lehengo proba izan da alert xss egitea
 
-<figure><img src="../.gitbook/assets/unknown (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/unknown (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 xss alerta
 
 <br>
 
 2.proba\
-![](<../.gitbook/assets/unknown (3) (1).png>)<br>
+![](<../.gitbook/assets/unknown (3) (1) (1).png>)<br>
 
-<figure><img src="../.gitbook/assets/unknown (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 <br>
 
 3.proba 👍
 
-<figure><img src="../.gitbook/assets/unknown (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
