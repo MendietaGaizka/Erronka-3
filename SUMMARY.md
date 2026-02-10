@@ -1,8 +1,17 @@
 # Table of contents
 
+## SEGUR
+
+* [Page 1](README.md)
+* [SEA](segur/sea.md)
+
+## IRAUNKORTASUNA
+
+* [iraunkortasuna](iraunkortasuna/iraunkortasuna.md)
+
 ## DB
 
-* [Page 1DB](README.md)
+* [Page 1DB](db/page-1db.md)
 
 ## wae
 

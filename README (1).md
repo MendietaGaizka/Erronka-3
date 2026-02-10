@@ -69,13 +69,13 @@ if (!@ldap\_bind($ldap, "$user@$ad\_domain", $pass)) {
 
 logeatzen denean admin bat&#x20;
 
-<figure><img src=".gitbook/assets/unknown (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/unknown (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
 ez admin bat logeatzean:&#x20;
 
-<figure><img src=".gitbook/assets/unknown (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/unknown (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 

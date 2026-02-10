@@ -187,6 +187,6 @@ GURE WEBGUNEAN  Bulnerabilitate bat aurkitu dugu eta explotatu dugu\
 \
 <br>
 
-<figure><img src="../.gitbook/assets/unknown (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/unknown (65).png" alt=""><figcaption></figcaption></figure>
 
 <br>

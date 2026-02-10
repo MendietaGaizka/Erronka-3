@@ -1,306 +1,101 @@
-# Page 1DB
+# Page 1
 
-## &#x20;PUNKETS BANK – INDIZE AURRERATUAK ETA EGIAZTAPENA
-
-### 1️ INDIZE KONPOSATUAK (Composite Index)
-
-#### 📌 clientes taula – izena + emaila
-
-CREATE INDEX idx\_clientes\_nombre\_email
-
-ON clientes(nombre, email);
+Guia de HAproxy en pfSense
 
 <br>
 
-#### 🧠 Azalpena
+Instalar haproxy en System > Package Manager > Available Packages
 
-Indize konposatu batek zutabe bat baino gehiago hartzen ditu.
-
-#### ✅ Justifikazioa (errubrika maila altua)
-
-* Bezeroak izenaren eta emailaren arabera bilatzen dira askotan\
-  <br>
-* Autentifikazio edo administrazio-kontsultak optimizatzen ditu\
-  <br>
-* Kontsulta konplexuetan errendimendua hobetzen du\
-  <br>
-
-***
-
-#### 🔍 Egiaztapena
-
-EXPLAIN
-
-SELECT \* FROM clientes
-
-WHERE nombre = 'Laura Gómez'
-
-AND email = 'laura.gomez@mail.com';
+<figure><img src=".gitbook/assets/unknown (51).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-➡ key: idx\_clientes\_nombre\_email agertu behar da
+Después vete a Services > HAProxy > Backend y añade los servidores backend (el que tiene la web)
 
-<figure><img src=".gitbook/assets/unknown.png" alt=""><figcaption></figcaption></figure>
-
-***
-
-### 2️ UNIQUE INDEX (Datuen osotasuna)
-
-#### 📌 clientes.dni
-
-CREATE UNIQUE INDEX idx\_clientes\_dni
-
-ON clientes(dni);
+<figure><img src=".gitbook/assets/unknown (52).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-#### &#x20;Azalpena
+Ponle nombre e IMPORTANTE en ‘Server List’ pon la IP de servidor que tiene la web, el puerto por el que se ve la web y en ‘Weight’ ponlo en 1 !!! segun gpt funciona si lo dejas vacio, pero a mi solo me ha funcionado cuando lo pongo en 1 !!!
 
-UNIQUE INDEX batek balio errepikatuak saihesten ditu.
+<figure><img src=".gitbook/assets/unknown (53).png" alt=""><figcaption></figcaption></figure>
 
-#### ✅ Justifikazioa
+Obviamente dejalo en active ;)
 
-* DNI bakarra izan behar du bezero bakoitzak\
-  <br>
-* Datuen koherentzia bermatzen du\
-  <br>
-* Banku-ingurune batean derrigorrezkoa\
-  <br>
+\
+\
+\
+\
+<br>
 
-***
+Si tienes dos servidores web pon ‘Round robin’ si solo tienes uno como yo dejalo en ‘None’ ;)
 
-#### 🔍 Egiaztapena
-
-EXPLAIN
-
-SELECT \* FROM clientes
-
-WHERE dni = '12345678A';
+<figure><img src=".gitbook/assets/unknown (54).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-<figure><img src=".gitbook/assets/unknown (1).png" alt=""><figcaption></figcaption></figure>
+Elige HTTP. IMPORTANTE pon ‘Http check method’ en GET, por defecto esta OPTIONS y a mi eso no me ha funcionado. En ‘Url used by http check requests’ déjalo vacío o pon /
 
-***
+<figure><img src=".gitbook/assets/unknown (55).png" alt=""><figcaption></figcaption></figure>
 
-### 3️ INDIZE KONPOSATUA – cuentas
+\
+<br>
 
-#### 📌 bezeroa + saldoa
-
-CREATE INDEX idx\_cuentas\_cliente\_saldo
-
-ON cuentas(cliente\_id, saldo);
+Ahora que tienes hecho la parte de backend te hace falta poner el frontend champions ;)
 
 <br>
 
-#### Azalpena
-
-Bezero baten kontuak saldoaren arabera aztertzeko.
-
-#### ✅ Justifikazioa
-
-* Bezero baten kontu handienak bilatzeko\
-  <br>
-* Txosten finantzarioetan oso erabilia\
-  <br>
-* Errendimendua hobetzen du JOIN-ekin\
-  <br>
-
-***
-
-#### 🔍 Egiaztapena
-
-EXPLAIN
-
-SELECT \* FROM cuentas
-
-WHERE cliente\_id = 3
-
-AND saldo > 10000;
-
-<figure><img src=".gitbook/assets/unknown (2).png" alt=""><figcaption></figcaption></figure>
+Vete a Services > HAProxy > Frontend y añade la IP por la que se verá la web en este caso WAN para que el resto del mundo lo vea, tambien tienes que especificar el puerto (a tu gusto elegir el puerto ;). IMPORTANTE recuerda el puerto que elegiste que después tendras que añadir una regla.
 
 <br>
 
-***
+<figure><img src=".gitbook/assets/unknown (56).png" alt=""><figcaption></figcaption></figure>
 
-### 4️ INDIZE KONPOSATUA – movimientos
-
-#### 📌 kontua + data
-
-CREATE INDEX idx\_movimientos\_cuenta\_fecha
-
-ON movimientos(cuenta\_id, fecha);
+Obviamente dejalo en active crack ;)
 
 <br>
 
-#### &#x20;Azalpena
+IMPORTANTE Más abajo en ‘Actions’ elige ‘Use Backend’ y eliges el backend que creaste antes champion ;)
 
-Kontu baten mugimenduak denbora-tarte batean bilatzeko.
+<figure><img src=".gitbook/assets/unknown (57).png" alt=""><figcaption></figcaption></figure>
 
-#### ✅ Justifikazioa
+\
+\
+\
+\
+\
+\
+\
+<br>
 
-* Auditoretzak\
-  <br>
-* Kontu-laburpenak\
-  <br>
-* Iruzur-detekzioa\
-  <br>
+Si has llegado hasta aquí significa que eres un verga larga y un putisimo chad ;)
 
-Bankuetan hau oso kritikoa da.
-
-***
-
-#### 🔍 Egiaztapena
-
-EXPLAIN
-
-SELECT \* FROM movimientos
-
-WHERE cuenta\_id = 1
-
-AND fecha BETWEEN '2025-01-01' AND '2025-12-31';
-
-<figure><img src=".gitbook/assets/unknown (3).png" alt=""><figcaption></figcaption></figure>
-
-***
-
-### 5️ INDIZEA ENUM zutabean
-
-#### 📌 mugimendu mota
-
-CREATE INDEX idx\_movimientos\_tipo
-
-ON movimientos(tipo);
+Pero te habrás dado cuenta de que no funciona eso es porque no has activado el servicio campeón
 
 <br>
 
-#### &#x20;Azalpena
+Vete a Services > HAProxy > Settings y marca la casilla ‘Enable HAProxy’
 
-ENUM zutabeetan ere indizeak erabil daitezke.
-
-#### ✅ Justifikazioa
-
-* Deposituak / transferentziak bereizteko\
-  <br>
-* Txosten estatistikoak optimizatzeko\
-  <br>
-* Analisi azkarragoak\
-  <br>
-
-***
-
-#### 🔍 Egiaztapena
-
-EXPLAIN
-
-SELECT \* FROM movimientos
-
-WHERE tipo = 'TRANSFERENCIA';
+<figure><img src=".gitbook/assets/unknown (58).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-***
-
-### 6  INDIZEEN LABURPEN TAULA (DOKUMENTAZIORAKO IDEALA)
-
-| Taula       | Indizea            | Helburua             |
-| ----------- | ------------------ | -------------------- |
-| clientes    | nombre, email      | Bilaketa konbinatua  |
-| clientes    | dni (UNIQUE)       | Datuen osotasuna     |
-| cuentas     | cliente\_id, saldo | Analisi finantzarioa |
-| movimientos | cuenta\_id, fecha  | Auditoretza          |
-| movimientos | tipo               | Estatistikak         |
-
-👉 Hau memoria edo proiektuan zuzenean sartzeko modukoa da.
-
-***
-
-### 7 INDIZE GUZTIAK IKUSTEKO
-
-SHOW INDEX FROM clientes;
-
-SHOW INDEX FROM cuentas;
-
-SHOW INDEX FROM movimientos;
-
-### &#x20;EVENT AUTOMATIKOA
-
-#### 🔹 Zer da EVENT bat?
-
-EVENT bat MySQL-eko zereginen programatzailea da. Cron-en antzekoa da, baina datu-basearen barruan exekutatzen da.
-
-***
-
-#### 🔹 Sortutako EVENT-a
-
-CREATE EVENT backup\_diario\_punkets
-
-ON SCHEDULE EVERY 1 DAY
-
-STARTS CURRENT\_TIMESTAMP
-
-DO
-
-BEGIN
-
-&#x20;   DELETE FROM punketsdb\_backup.movimientos;
-
-&#x20;   DELETE FROM punketsdb\_backup.cuentas;
-
-&#x20;   DELETE FROM punketsdb\_backup.clientes;
-
-&#x20;   DELETE FROM punketsdb\_backup.ceos;
+PARA VER LAS STATS tiene que ponerle un puerto de escucha asi que vete más abajo pedazo que crack y ponle uno (a tu puto gusto el puerto a elegir).
 
 <br>
 
-&#x20;   INSERT INTO punketsdb\_backup.ceos
+Yo lo he puesto en el 25000 y me la pela
 
-&#x20;       SELECT \* FROM punketsdb.ceos;
-
-<br>
-
-&#x20;   INSERT INTO punketsdb\_backup.clientes
-
-&#x20;       SELECT \* FROM punketsdb.clientes;
+<figure><img src=".gitbook/assets/unknown (59).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-&#x20;   INSERT INTO punketsdb\_backup.cuentas
-
-&#x20;       SELECT \* FROM punketsdb.cuentas;
+Por utlimo, que estoy hasta los huevos de esta puta guia mamada, añade una regla en el firewall con el puerto que elegiste en el Frontend.
 
 <br>
 
-&#x20;   INSERT INTO punketsdb\_backup.movimientos
+Paso de explicarte como hacer la regla que es una paja yo aqui tengo 80 porque puse 80 pero tu pon el que elegiste mama huevazo.
 
-&#x20;       SELECT \* FROM punketsdb.movimientos;
-
-END;
+<figure><img src=".gitbook/assets/unknown (60).png" alt=""><figcaption></figcaption></figure>
 
 <br>
-
-***
-
-#### 🔹 Nola funtzionatzen du?
-
-1. Egunero automatikoki exekutatzen da\
-   <br>
-2. Backup-eko taulak garbitzen ditu\
-   <br>
-3. Datu guztiak berriro kopiatzen ditu\
-   <br>
-4. Backup-a beti eguneratuta mantentzen du\
-   <br>
-
-***
-
-#### 🔹 Zergatik egunero?
-
-* Banku-datuak etengabe aldatzen dira\
-  <br>
-* Egun bateko datu-galera onargarria da (RPO = 24h)\
-  <br>
-* Errendimendu-kostua txikia da\
-  <br>
