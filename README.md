@@ -1,243 +1,306 @@
-# adrekin konexioa , rol , check session
+# Page 1DB
 
-## AD REKIN KONEXIOA:
+## &#x20;PUNKETS BANK – INDIZE AURRERATUAK ETA EGIAZTAPENA
 
-konfigurazioa:\
-\<?php
+### 1️ INDIZE KONPOSATUAK (Composite Index)
 
-$db\_host="localhost";
+#### 📌 clientes taula – izena + emaila
 
-$db\_user="root";
+CREATE INDEX idx\_clientes\_nombre\_email
 
-$db\_pass="Admin123";
-
-$db\_name="2erronkabn";
-
-$ad\_server="ldap://192.168.0.1";
-
-$ad\_domain="punkets.lan";
-
-$ad\_base\_dn="OU=banco\_punkets,DC=punkets,DC=lan";
+ON clientes(nombre, email);
 
 <br>
 
-<br>
+#### 🧠 Azalpena
 
-en login.php:\
-<br>
+Indize konposatu batek zutabe bat baino gehiago hartzen ditu.
 
-/\* ===== CONEXIÓN A AD ===== \*/
+#### ✅ Justifikazioa (errubrika maila altua)
 
-$ldap = ldap\_connect($ad\_server);
+* Bezeroak izenaren eta emailaren arabera bilatzen dira askotan\
+  <br>
+* Autentifikazio edo administrazio-kontsultak optimizatzen ditu\
+  <br>
+* Kontsulta konplexuetan errendimendua hobetzen du\
+  <br>
 
-if (!$ldap) {
+***
 
-&#x20;   echo json\_encode(\["success" => false]);
+#### 🔍 Egiaztapena
 
-&#x20;   exit;
+EXPLAIN
 
-}
+SELECT \* FROM clientes
 
-<br>
+WHERE nombre = 'Laura Gómez'
 
-ldap\_set\_option($ldap, LDAP\_OPT\_PROTOCOL\_VERSION, 3);
-
-ldap\_set\_option($ldap, LDAP\_OPT\_REFERRALS, 0);
-
-<br>
-
-/\* ===== BIND ===== \*/
-
-if (!@ldap\_bind($ldap, "$user@$ad\_domain", $pass)) {
-
-&#x20;   echo json\_encode(\["success" => false]);
-
-&#x20;   exit;
-
-}
-
-\
-\
-\
-\
-\
-\
-\
-<br>
-
-## rol Admin no admin
-
-logeatzen denean admin bat&#x20;
-
-<figure><img src=".gitbook/assets/unknown (6).png" alt=""><figcaption></figcaption></figure>
+AND email = 'laura.gomez@mail.com';
 
 <br>
 
-ez admin bat logeatzean:&#x20;
+➡ key: idx\_clientes\_nombre\_email agertu behar da
 
-<figure><img src=".gitbook/assets/unknown (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/unknown.png" alt=""><figcaption></figcaption></figure>
 
-<br>
+***
 
-rolak jsan:\
-&#x20; if (data.role === "admin") {
+### 2️ UNIQUE INDEX (Datuen osotasuna)
 
-&#x20;               if (!location.pathname.endsWith("home.html")) {
+#### 📌 clientes.dni
 
-&#x20;                   location.href = "home.html";
+CREATE UNIQUE INDEX idx\_clientes\_dni
 
-&#x20;               }
-
-&#x20;           } else {
-
-&#x20;               if (!location.pathname.endsWith("orrinagusia\_user.html")) {
-
-&#x20;                   location.href = "orrinagusia\_user.html";
-
-&#x20;               }
-
-&#x20;           }
-
-\
-\
-\
-<br>
-
-## CHECKSESION:
-
-rolak ere ikusteko editatu dugu:\
-checsesion.php:\
-\<?php
-
-session\_start();
+ON clientes(dni);
 
 <br>
 
-header("Content-Type: application/json");
+#### &#x20;Azalpena
+
+UNIQUE INDEX batek balio errepikatuak saihesten ditu.
+
+#### ✅ Justifikazioa
+
+* DNI bakarra izan behar du bezero bakoitzak\
+  <br>
+* Datuen koherentzia bermatzen du\
+  <br>
+* Banku-ingurune batean derrigorrezkoa\
+  <br>
+
+***
+
+#### 🔍 Egiaztapena
+
+EXPLAIN
+
+SELECT \* FROM clientes
+
+WHERE dni = '12345678A';
 
 <br>
 
-if (isset($\_SESSION\["user"]) && isset($\_SESSION\["role"])) {
+<figure><img src=".gitbook/assets/unknown (1).png" alt=""><figcaption></figcaption></figure>
 
-&#x20;   echo json\_encode(\[
+***
 
-&#x20;       "logged" => true,
+### 3️ INDIZE KONPOSATUA – cuentas
 
-&#x20;       "user" => $\_SESSION\["user"],
+#### 📌 bezeroa + saldoa
 
-&#x20;       "role" => $\_SESSION\["role"]
+CREATE INDEX idx\_cuentas\_cliente\_saldo
 
-&#x20;   ]);
-
-} else {
-
-&#x20;   echo json\_encode(\[
-
-&#x20;       "logged" => false
-
-&#x20;   ]);
-
-}
+ON cuentas(cliente\_id, saldo);
 
 <br>
 
-\
-<br>
+#### Azalpena
 
-js an
+Bezero baten kontuak saldoaren arabera aztertzeko.
 
-<br>
+#### ✅ Justifikazioa
 
-function checkSession() {
+* Bezero baten kontu handienak bilatzeko\
+  <br>
+* Txosten finantzarioetan oso erabilia\
+  <br>
+* Errendimendua hobetzen du JOIN-ekin\
+  <br>
 
-&#x20;   fetch("php/auth/checkSession.php")
+***
 
-&#x20;       .then(response => response.json())
+#### 🔍 Egiaztapena
 
-&#x20;       .then(data => {
+EXPLAIN
 
-<br>
+SELECT \* FROM cuentas
 
-&#x20;           // No logueado
+WHERE cliente\_id = 3
 
-&#x20;           if (!data.logged) {
+AND saldo > 10000;
 
-&#x20;               if (!location.pathname.endsWith("index.html")) {
-
-&#x20;                   location.href = "index.html";
-
-&#x20;               } else {
-
-&#x20;                   loadLogin();
-
-&#x20;               }
-
-&#x20;               return;
-
-&#x20;           }
+<figure><img src=".gitbook/assets/unknown (2).png" alt=""><figcaption></figcaption></figure>
 
 <br>
 
-&#x20;           // Logueado → redirigir por rol
+***
 
-&#x20;           if (data.role === "admin") {
+### 4️ INDIZE KONPOSATUA – movimientos
 
-&#x20;               if (!location.pathname.endsWith("home.html")) {
+#### 📌 kontua + data
 
-&#x20;                   location.href = "home.html";
+CREATE INDEX idx\_movimientos\_cuenta\_fecha
 
-&#x20;               }
-
-&#x20;           } else {
-
-&#x20;               if (!location.pathname.endsWith("orrinagusia\_user.html")) {
-
-&#x20;                   location.href = "orrinagusia\_user.html";
-
-&#x20;               }
-
-&#x20;           }
+ON movimientos(cuenta\_id, fecha);
 
 <br>
 
-&#x20;           // Mostrar usuario si existe
+#### &#x20;Azalpena
 
-&#x20;           if (typeof user !== "undefined") {
+Kontu baten mugimenduak denbora-tarte batean bilatzeko.
 
-&#x20;               user.innerText = data.user;
+#### ✅ Justifikazioa
 
-&#x20;           }
+* Auditoretzak\
+  <br>
+* Kontu-laburpenak\
+  <br>
+* Iruzur-detekzioa\
+  <br>
+
+Bankuetan hau oso kritikoa da.
+
+***
+
+#### 🔍 Egiaztapena
+
+EXPLAIN
+
+SELECT \* FROM movimientos
+
+WHERE cuenta\_id = 1
+
+AND fecha BETWEEN '2025-01-01' AND '2025-12-31';
+
+<figure><img src=".gitbook/assets/unknown (3).png" alt=""><figcaption></figcaption></figure>
+
+***
+
+### 5️ INDIZEA ENUM zutabean
+
+#### 📌 mugimendu mota
+
+CREATE INDEX idx\_movimientos\_tipo
+
+ON movimientos(tipo);
 
 <br>
 
-&#x20;           // Botón logout si existe
+#### &#x20;Azalpena
 
-&#x20;           if (typeof btnLogout !== "undefined") {
+ENUM zutabeetan ere indizeak erabil daitezke.
 
-&#x20;               btnLogout.onclick = logout;
+#### ✅ Justifikazioa
 
-&#x20;           }
+* Deposituak / transferentziak bereizteko\
+  <br>
+* Txosten estatistikoak optimizatzeko\
+  <br>
+* Analisi azkarragoak\
+  <br>
 
-&#x20;       });
+***
 
-}
+#### 🔍 Egiaztapena
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
+EXPLAIN
+
+SELECT \* FROM movimientos
+
+WHERE tipo = 'TRANSFERENCIA';
+
 <br>
+
+***
+
+### 6  INDIZEEN LABURPEN TAULA (DOKUMENTAZIORAKO IDEALA)
+
+| Taula       | Indizea            | Helburua             |
+| ----------- | ------------------ | -------------------- |
+| clientes    | nombre, email      | Bilaketa konbinatua  |
+| clientes    | dni (UNIQUE)       | Datuen osotasuna     |
+| cuentas     | cliente\_id, saldo | Analisi finantzarioa |
+| movimientos | cuenta\_id, fecha  | Auditoretza          |
+| movimientos | tipo               | Estatistikak         |
+
+👉 Hau memoria edo proiektuan zuzenean sartzeko modukoa da.
+
+***
+
+### 7 INDIZE GUZTIAK IKUSTEKO
+
+SHOW INDEX FROM clientes;
+
+SHOW INDEX FROM cuentas;
+
+SHOW INDEX FROM movimientos;
+
+### &#x20;EVENT AUTOMATIKOA
+
+#### 🔹 Zer da EVENT bat?
+
+EVENT bat MySQL-eko zereginen programatzailea da. Cron-en antzekoa da, baina datu-basearen barruan exekutatzen da.
+
+***
+
+#### 🔹 Sortutako EVENT-a
+
+CREATE EVENT backup\_diario\_punkets
+
+ON SCHEDULE EVERY 1 DAY
+
+STARTS CURRENT\_TIMESTAMP
+
+DO
+
+BEGIN
+
+&#x20;   DELETE FROM punketsdb\_backup.movimientos;
+
+&#x20;   DELETE FROM punketsdb\_backup.cuentas;
+
+&#x20;   DELETE FROM punketsdb\_backup.clientes;
+
+&#x20;   DELETE FROM punketsdb\_backup.ceos;
+
+<br>
+
+&#x20;   INSERT INTO punketsdb\_backup.ceos
+
+&#x20;       SELECT \* FROM punketsdb.ceos;
+
+<br>
+
+&#x20;   INSERT INTO punketsdb\_backup.clientes
+
+&#x20;       SELECT \* FROM punketsdb.clientes;
+
+<br>
+
+&#x20;   INSERT INTO punketsdb\_backup.cuentas
+
+&#x20;       SELECT \* FROM punketsdb.cuentas;
+
+<br>
+
+&#x20;   INSERT INTO punketsdb\_backup.movimientos
+
+&#x20;       SELECT \* FROM punketsdb.movimientos;
+
+END;
+
+<br>
+
+***
+
+#### 🔹 Nola funtzionatzen du?
+
+1. Egunero automatikoki exekutatzen da\
+   <br>
+2. Backup-eko taulak garbitzen ditu\
+   <br>
+3. Datu guztiak berriro kopiatzen ditu\
+   <br>
+4. Backup-a beti eguneratuta mantentzen du\
+   <br>
+
+***
+
+#### 🔹 Zergatik egunero?
+
+* Banku-datuak etengabe aldatzen dira\
+  <br>
+* Egun bateko datu-galera onargarria da (RPO = 24h)\
+  <br>
+* Errendimendu-kostua txikia da\
+  <br>
