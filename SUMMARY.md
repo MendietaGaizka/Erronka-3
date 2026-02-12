@@ -32,3 +32,8 @@
 * [pentesting](hacking/pentesting.md)
 * [sql injection](hacking/sql-injection.md)
 * [xss](hacking/xss.md)
+
+## SZER
+
+* [Zimbra](szer/zimbra.md)
+* [Emby](szer/emby.md)
